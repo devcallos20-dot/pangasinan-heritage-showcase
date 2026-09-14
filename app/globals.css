@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * COLOR TOKENS (atom).
+ * Declared once here as CSS custom properties and mirrored in
+ * tailwind.config.ts. Any component may read them directly, and
+ * <ColorTokens /> renders this same list as a living swatch sheet.
+ */
+:root {
+  --color-forest: #0c1b14;
+  --color-pine: #12261c;
+  --color-moss: #1e6b4f;
+  --color-fern: #3e9e76;
+  --color-gold: #e4b84a;
+  --color-gold-deep: #c99a2e;
+  --color-sand: #f3efe4;
+  --color-ink: #0f1a14;
+  --color-mist: #9db3a6;
+  --color-hairline: #22392c;
+
+  /* spacing rhythm */
+  --shell: 72rem;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-forest);
+    color: var(--color-sand);
+    font-family: var(--font-body), system-ui, sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Visible keyboard focus everywhere — WCAG 2.4.7 */
+  :focus-visible {
+    outline: 2px solid var(--color-gold);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Skip-link target styling */
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display), system-ui, sans-serif;
+  }
+}
+
+/* Respect users who ask for less motion — WCAG 2.3.3 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* The lighthouse beam: the one bold, deliberate motion on the page. */
+@keyframes beam-sweep {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: translateX(-8%);
+  }
+  50% {
+    opacity: 0.7;
+    transform: translateX(8%);
+  }
+}
+.beam {
+  animation: beam-sweep 7s ease-in-out infinite;
+}
